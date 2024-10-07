@@ -1,0 +1,107 @@
+db.wasabi.aggregate([
+    {
+        $project : {
+            name:1,
+            "albums.title" : 1,
+            "albums.genre" : 1,
+            "albums.publicationDate" : 1,
+            "albums.songs.title" : 1
+        }
+    }
+])
+
+db.wasabi.aggregate
+([
+    {
+        $unwind : "$albums"
+    },
+    {
+        "$group": {
+            "_id": "$albums.genre", 
+            "count":{"$sum": 1}
+        }
+    }
+])
+
+
+db.wasabi.aggregate
+([
+    {
+        $unwind : "$albums"
+    },
+    {
+        "$group": {
+            "_id": "$albums.genre", 
+            genre : {$first : "$genre"},
+            "count":{"$sum": 1}
+        }
+    },
+    {
+        
+            $count : "genre"
+        
+    }
+])
+
+==> 43 genres différents 
+
+Genres : Hip hop, Rock, Metal, Pop
+
+
+db.wasabi.aggregate
+([
+    {
+        $unwind : "$albums"
+    },
+    {
+        "$group": {
+            "_id": "$albums.genre"          	
+        }
+    },
+    {
+        $project : {
+            name : "$_id",
+            _id : 0
+        }
+    },
+    {
+        $out : "genres"
+    }
+])
+
+
+db.genres.aggregate 
+([
+    {
+        $project : {
+            genreP : {
+                $switch : {
+                    branches : [
+                        {
+                            case : {
+                                $in : [ "$name", /Pop/]
+                            },
+                            then : "pop"
+                        }
+                    ],
+                    default : "none"
+                    
+                }
+            }
+        }
+    }
+    
+])
+
+db.genres.aggregate ([
+    {
+        $project : {
+            genreP: {
+                $regexMatch : {
+                    input : "$name", regex : /Pop/, options : "i"
+                }
+            }
+        }
+        
+    }
+])
