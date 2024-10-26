@@ -10,6 +10,7 @@ db.wasabi.aggregate([
     }
 ])
 
+=> Compter pour chaque genre son apparition (=nb albums)
 db.wasabi.aggregate
 ([
     {
@@ -20,10 +21,15 @@ db.wasabi.aggregate
             "_id": "$albums.genre", 
             "count":{"$sum": 1}
         }
+    },
+    {
+        $sort : {count : -1}
     }
 ])
 
 
+
+=> Nombre de genres distinct
 db.wasabi.aggregate
 ([
     {
@@ -42,66 +48,137 @@ db.wasabi.aggregate
         
     }
 ])
-
-==> 43 genres différents 
-
-Genres : Hip hop, Rock, Metal, Pop
+==> 528 genres différents 
+GENRES : 
 
 
-db.wasabi.aggregate
-([
+NA
+Pop
+Hip hop
+Rock
+Metal
+Country
+Electronic
+
+
+
+db.wasabi.aggregate([
+    {
+        $project : {
+            albums : 1
+        }
+    },
+    {
+        $out:"genres"
+    }
+])
+
+db.genres.aggregate([
+    {
+        $project : {
+            albums : 1,
+            _id:0
+        }
+    },
     {
         $unwind : "$albums"
     },
     {
-        "$group": {
-            "_id": "$albums.genre"          	
-        }
-    },
-    {
-        $project : {
-            name : "$_id",
-            _id : 0
-        }
-    },
-    {
-        $out : "genres"
+        $out: "albums"
     }
 ])
 
 
-db.genres.aggregate 
-([
+db.albums.aggregate([
     {
-        $project : {
+        $project: {
             genreP : {
                 $switch : {
                     branches : [
                         {
                             case : {
-                                $in : [ "$name", /Pop/]
+                                $regexMatch : { input : "$albums.genre", regex : /Pop/, options : "i" }
                             },
-                            then : "pop"
+                            then : "Pop"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Rock/, options : "i" }
+                            },
+                            then : "Rock"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Hip hop/, options : "i" }
+                            },
+                            then : "Hip hop"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Metal/, options : "i" }
+                            },
+                            then : "Metal"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Country/, options : "i" }
+                            },
+                            then : "Country"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Electronic/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Punk/, options : "i" }
+                            },
+                            then : "Punk"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Folk/, options : "i" }
+                            },
+                            then : "Folk"
                         }
+
                     ],
-                    default : "none"
+                    default : "NA"
                     
                 }
-            }
+            },
+            "albums.genre" : 1
+        }
+    },
+    ---------------------------------------------------------------------
+    
+    {
+        $group : {
+            "_id": "$genreP", 
+            "count":{"$sum": 1} 
         }
     }
+
+    {
+        $match : {
+            $and : [{genreP : "NA"}, {"albums.genre" : {$ne : ""} }]
+        }
+    }
+
     
+
+    
+  
 ])
 
-db.genres.aggregate ([
-    {
-        $project : {
-            genreP: {
-                $regexMatch : {
-                    input : "$name", regex : /Pop/, options : "i"
-                }
-            }
-        }
-        
-    }
-])
+
+
