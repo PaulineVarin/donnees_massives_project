@@ -57,8 +57,21 @@ Pop
 Hip hop
 Rock
 Metal
+Punk
 Country
 Electronic
+Hardcore
+Variety music
+Funk
+Experimental
+Blues
+Classical
+Latin
+Reggae
+Religious music
+Rap
+Indie
+Jazz
 
 
 
@@ -97,46 +110,461 @@ db.albums.aggregate([
                     branches : [
                         {
                             case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Jazz/, options : "i" }
+                            },
+                            then : "Jazz"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Swing/, options : "i" }
+                            },
+                            then : "Jazz"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Indie/, options : "i" }
+                            },
+                            then : "Indie"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Lo-Fi/, options : "i" }
+                            },
+                            then : "Indie"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Chillwave/, options : "i" }
+                            },
+                            then : "Indie"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Rap/, options : "i" }
+                            },
+                            then : "Rap"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Reggae/, options : "i" }
+                            },
+                            then : "Reggae"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Latin/, options : "i" }
+                            },
+                            then : "Latin"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Tropicalismo/, options : "i" }
+                            },
+                            then : "Latin"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Cumbia/, options : "i" }
+                            },
+                            then : "Latin"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Flamenco/, options : "i" }
+                            },
+                            then : "Latin"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Son Cubano/, options : "i" }
+                            },
+                            then : "Latin"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Brazilian/, options : "i" }
+                            },
+                            then : "Latin"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Samba/, options : "i" }
+                            },
+                            then : "Latin"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Fado/, options : "i" }
+                            },
+                            then : "Latin"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Trova/, options : "i" }
+                            },
+                            then : "Latin"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Ranchera/, options : "i" }
+                            },
+                            then : "Latin"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Classical/, options : "i" }
+                            },
+                            then : "Classical"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Opera/, options : "i" }
+                            },
+                            then : "Classical"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Blues/, options : "i" }
+                            },
+                            then : "Blues"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /R&amp;B/, options : "i" }
+                            },
+                            then : "Blues"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Christmas/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Schlager/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /MPB/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Children&apos;s Music/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Chanson/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Soundtrack/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Sertanejo/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Protest Song/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Adult/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Celtic/, options : "i" }
+                            },
+                            then : "Variety music"
+                        }, 
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Americana/, options : "i" }
+                            },
+                            then : "Variety music"
+                        }, 
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Avant-garde/, options : "i" }
+                            },
+                            then : "Variety music"
+                        }, 
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /World Music/, options : "i" }
+                            },
+                            then : "Variety music"
+                        }, 
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Ambient/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Calypso/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Ska/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Easy Listening/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Francophone/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Ballad/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Worship/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Noise/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Morna/, options : "i" }
+                            },
+                            then : "Variety music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Experimental/, options : "i" }
+                            },
+                            then : "Experimental"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Minimal/, options : "i" }
+                            },
+                            then : "Experimental"
+                        },
+                        {
+                            case : {
                                 $regexMatch : { input : "$albums.genre", regex : /Pop/, options : "i" }
                             },
                             then : "Pop"
                         },
-
                         {
                             case : {
                                 $regexMatch : { input : "$albums.genre", regex : /Rock/, options : "i" }
                             },
                             then : "Rock"
                         },
-
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Dark Wave/, options : "i" }
+                            },
+                            then : "Rock"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /New Wave/, options : "i" }
+                            },
+                            then : "Rock"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Emo/, options : "i" }
+                            },
+                            then : "Rock"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Grunge/, options : "i" }
+                            },
+                            then : "Rock"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Shoegazing/, options : "i" }
+                            },
+                            then : "Rock"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Canterbury/, options : "i" }
+                            },
+                            then : "Rock"
+                        },
                         {
                             case : {
                                 $regexMatch : { input : "$albums.genre", regex : /Hip hop/, options : "i" }
                             },
                             then : "Hip hop"
                         },
-
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Freestyle/, options : "i" }
+                            },
+                            then : "Hip hop"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Trip Hop/, options : "i" }
+                            },
+                            then : "Hip hop"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Crunk/, options : "i" }
+                            },
+                            then : "Hip hop"
+                        },
                         {
                             case : {
                                 $regexMatch : { input : "$albums.genre", regex : /Metal/, options : "i" }
                             },
                             then : "Metal"
                         },
-
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Deathcore/, options : "i" }
+                            },
+                            then : "Metal"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Goregrind/, options : "i" }
+                            },
+                            then : "Metal"
+                        },
                         {
                             case : {
                                 $regexMatch : { input : "$albums.genre", regex : /Country/, options : "i" }
                             },
                             then : "Country"
                         },
-
                         {
                             case : {
-                                $regexMatch : { input : "$albums.genre", regex : /Electronic/, options : "i" }
+                                $regexMatch : { input : "$albums.genre", regex : /Bluegrass/, options : "i" }
+                            },
+                            then : "Country"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Electro/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Dance/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Chiptune/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /EBM/, options : "i" }
                             },
                             then : "Electronic"
                         },
 
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /EDM/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Industrial/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Breakbeat/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Dubstep/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Trance/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Drum And Bass/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Aggrotech/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /New Age/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Downtempo/, options : "i" }
+                            },
+                            then : "Electronic"
+                        },
                         {
                             case : {
                                 $regexMatch : { input : "$albums.genre", regex : /Punk/, options : "i" }
@@ -146,11 +574,172 @@ db.albums.aggregate([
 
                         {
                             case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Gothic/, options : "i" }
+                            },
+                            then : "Punk"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Hardcore/, options : "i" }
+                            },
+                            then : "Hardcore"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Horrorcore/, options : "i" }
+                            },
+                            then : "Hardcore"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Mathcore/, options : "i" }
+                            },
+                            then : "Hardcore"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Grindcore/, options : "i" }
+                            },
+                            then : "Punk"
+                        },
+
+                        {
+                            case : {
                                 $regexMatch : { input : "$albums.genre", regex : /Folk/, options : "i" }
                             },
                             then : "Folk"
-                        }
+                        },
 
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Comedy/, options : "i" }
+                            },
+                            then : "Folk"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Acoustic/, options : "i" }
+                            },
+                            then : "Folk"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Singer-Songwriter/, options : "i" }
+                            },
+                            then : "Folk"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Volkslied/, options : "i" }
+                            },
+                            then : "Folk"
+                        },
+
+       
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Funk/, options : "i" }
+                            },
+                            then : "Funk"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Disco/, options : "i" }
+                            },
+                            then : "Funk"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /House/, options : "i" }
+                            },
+                            then : "Funk"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Soul/, options : "i" }
+                            },
+                            then : "Religious music"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Christian/, options : "i" }
+                            },
+                            then : "Religious music"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Gospel/, options : "i" }
+                            },
+                            then : "Religious music"
+                        },
+
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Medieval/, options : "i" }
+                            },
+                            then : "Religious music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Choral/, options : "i" }
+                            },
+                            then : "Religious music"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Norte&#xF1;o&#x200E;/, options : "i" }
+                            },
+                            then : "A TRAITER"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Vocal/, options : "i" }
+                            },
+                            then : "A TRAITER"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Musical/, options : "i" }
+                            },
+                            then : "A TRAITER"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Crossover/, options : "i" }
+                            },
+                            then : "A TRAITER"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Forr&#xF3;/, options : "i" }
+                            },
+                            then : "A TRAITER"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Ax&#xE9;/, options : "i" }
+                            },
+                            then : "A TRAITER"
+                        },
+                        {
+                            case : {
+                                $regexMatch : { input : "$albums.genre", regex : /Norte&#xF1;o/, options : "i" }
+                            },
+                            then : "A TRAITER"
+                        }
+                         
                     ],
                     default : "NA"
                     
