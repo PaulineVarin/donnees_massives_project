@@ -74,10 +74,10 @@ Indie
 Jazz
 
 
-
 db.wasabi.aggregate([
     {
         $project : {
+            name : 1,
             albums : 1
         }
     },
@@ -90,6 +90,7 @@ db.genres.aggregate([
     {
         $project : {
             albums : 1,
+            name:1,
             _id:0
         }
     },
@@ -108,9 +109,10 @@ db.albums.aggregate([
     {
         $project: {
             genreAlbum : "$albums.genre",
-            name : "$albums.name",
+            name : "$albums.title",
             songs : "$albums.songs.title" ,
             country : "$albums.country",
+            artist : "$name",
             genrePrincipal : {
                 $switch : {
                     branches : [
@@ -704,7 +706,7 @@ db.albums.aggregate([
                             then : "Religious music"
                         }
                     ],
-                    default : "NA"
+                    default : "Autre"
                     
                 }
             }
@@ -712,22 +714,28 @@ db.albums.aggregate([
     },
     {
         $project : {
-            genreAlbum : 1,
+            genreAlbum : {
+                $cond : {
+                    if : {$eq  :["$genreAlbum",""]}, then : "NA",
+                    else : "$genreAlbum"
+                }
+            },
             name : 1,
             songs : 1,
             country : 1 ,
             genrePrincipal : 1,
-            genreSTemp : {
+            artist  : 1,
+            genreSecondaire : {
                 $switch : {
                     branches : [
                         {
                             case : {
-                                $regexMatch : { input : "$genreP", regex : /Wave/, options : "i" }
+                                $and : [{$regexMatch : { input : "$genrePrincipal", regex : /Rock/, options : "i" }},{$regexMatch : { input : "$genreAlbum", regex : /Wave/, options : "i" }}]
                             },
                             then : "Wave"
                         },
                     ],
-                    default : "Autre"
+                    default : "$genreAlbum"
                 }
             }
         }
@@ -735,41 +743,43 @@ db.albums.aggregate([
     },
     {
         $project : {
-            genreAlbum : 1,
+            genreAlbum : {
+                $cond : {
+                    if : {$eq  :["$genreAlbum","$genreSecondaire"]}, then : "",
+                    else : "$genreAlbum"
+                }
+            },
             name : 1,
             songs : 1,
             country : 1 ,
+            artist : 1,
             genrePrincipal : 1,
-            genreS : {
-                $cond : {
-                    if : {$eq  :["$genreSTemp","Autre"]}, then : "",
-                    else : "$genreSTemp"
-                }
-            }
-        } 
+            genreSecondaire : 1 
+        }
+        
     },
     {
-        $out : "albums_ok"
-    }
-    ---------------------------------------------------------------------
-    
-    {
-        $group : {
-            "_id": "$genreP", 
-            "count":{"$sum": 1} 
+        $lookup: {
+            from: "pays",
+            localField: "country",
+            foreignField: "code",
+            as: "countryMatch"
         }
-    }
-
+    },
     {
-        $match : {
-            $and : [{genreP : "NA"}, {"albums.genre" : {$ne : ""} }]
+        $addFields: {
+            "country_name": {
+                $cond: {
+                    if: { $gt: [{ $size: "$countryMatch" }, 0] },
+                    then: { $arrayElemAt: ["$countryMatch.country", 0] },
+                    else: "Autre"
+                }
+            }
         }
+    },
+    {
+        $out : "wasabi_clean"
     }
-
-    
-
-    
-  
 ])
 
 
