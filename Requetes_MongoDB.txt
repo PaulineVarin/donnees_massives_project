@@ -101,11 +101,17 @@ db.genres.aggregate([
     }
 ])
 
+--on ne vas pas au bout du nettoyage car l'objectif etait de montrer ce qu'on peut faire en terme de visualisation
+et on choisit de faire un ensemble de hiérarchies plus importantes pour un genre particulier pour montrer ce qu'on peut faire
 
 db.albums.aggregate([
     {
         $project: {
-            genreP : {
+            genreAlbum : "$albums.genre",
+            name : "$albums.name",
+            songs : "$albums.songs.title" ,
+            country : "$albums.country",
+            genrePrincipal : {
                 $switch : {
                     branches : [
                         {
@@ -696,58 +702,55 @@ db.albums.aggregate([
                                 $regexMatch : { input : "$albums.genre", regex : /Choral/, options : "i" }
                             },
                             then : "Religious music"
-                        },
-                        {
-                            case : {
-                                $regexMatch : { input : "$albums.genre", regex : /Norte&#xF1;o&#x200E;/, options : "i" }
-                            },
-                            then : "A TRAITER"
-                        },
-                        {
-                            case : {
-                                $regexMatch : { input : "$albums.genre", regex : /Vocal/, options : "i" }
-                            },
-                            then : "A TRAITER"
-                        },
-                        {
-                            case : {
-                                $regexMatch : { input : "$albums.genre", regex : /Musical/, options : "i" }
-                            },
-                            then : "A TRAITER"
-                        },
-                        {
-                            case : {
-                                $regexMatch : { input : "$albums.genre", regex : /Crossover/, options : "i" }
-                            },
-                            then : "A TRAITER"
-                        },
-                        {
-                            case : {
-                                $regexMatch : { input : "$albums.genre", regex : /Forr&#xF3;/, options : "i" }
-                            },
-                            then : "A TRAITER"
-                        },
-                        {
-                            case : {
-                                $regexMatch : { input : "$albums.genre", regex : /Ax&#xE9;/, options : "i" }
-                            },
-                            then : "A TRAITER"
-                        },
-                        {
-                            case : {
-                                $regexMatch : { input : "$albums.genre", regex : /Norte&#xF1;o/, options : "i" }
-                            },
-                            then : "A TRAITER"
                         }
-                         
                     ],
                     default : "NA"
                     
                 }
-            },
-            "albums.genre" : 1
+            }
         }
     },
+    {
+        $project : {
+            genreAlbum : 1,
+            name : 1,
+            songs : 1,
+            country : 1 ,
+            genrePrincipal : 1,
+            genreSTemp : {
+                $switch : {
+                    branches : [
+                        {
+                            case : {
+                                $regexMatch : { input : "$genreP", regex : /Wave/, options : "i" }
+                            },
+                            then : "Wave"
+                        },
+                    ],
+                    default : "Autre"
+                }
+            }
+        }
+        
+    },
+    {
+        $project : {
+            genreAlbum : 1,
+            name : 1,
+            songs : 1,
+            country : 1 ,
+            genrePrincipal : 1,
+            genreS : {
+                $cond : {
+                    if : {$eq  :["$genreSTemp","Autre"]}, then : "",
+                    else : "$genreSTemp"
+                }
+            }
+        } 
+    },
+    {
+        $out : "albums_ok"
+    }
     ---------------------------------------------------------------------
     
     {
