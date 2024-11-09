@@ -1,92 +1,51 @@
-
-// The svg
+//SVG
 var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+    width = window.innerWidth - 100,
+    height =  window.innerHeight - 50;
 
-// Map and projection
-var projection = d3.geoMercator()
-    .center([2, 47])                // GPS of location to zoom on
-    .scale(1020)                       // This is like the zoom
-    .translate([ width/2, height/2 ])
+svg.attr('width', width).attr('height', height);
+var g = svg.append("g");
 
-// Create data for circles:
-var markers = [
-  {long: 9.083, lat: 42.149, group: "A", size: 34}, // corsica
-  {long: 7.26, lat: 43.71, group: "A", size: 14}, // nice
-  {long: 2.349, lat: 48.864, group: "B", size: 87}, // Paris
-  {long: -1.397, lat: 43.664, group: "B", size: 41}, // Hossegor
-  {long: 3.075, lat: 50.640, group: "C", size: 78}, // Lille
-  {long: -3.83, lat: 48, group: "C", size: 12} // Morlaix
-];
+//Zoom
+function zoomed() {
+  var transform = d3.event.transform; 
+  g.style("stroke-width", 1.5 / transform.k + "px");
+  g.attr("transform", transform);
+}
+
+var zoom = d3.zoom()
+    .scaleExtent([1, 8])
+    .on("zoom", zoomed);
+
+svg.call(zoom);
+
 
 // Load external data and boot
 d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(data){
 
-    // Filter data
-    data.features = data.features.filter( function(d){return d.properties.name=="France"} )
-
-    // Create a color scale
-    var color = d3.scaleOrdinal()
-      .domain(["A", "B", "C" ])
-      .range([ "#402D54", "#D18975", "#8FD175"])
-
-    // Add a scale for bubble size
-    var size = d3.scaleLinear()
-      .domain([1,100])  // What's in the data
-      .range([ 4, 50])  // Size in pixel
+    // Map and projection
+    var projection = d3.geoNaturalEarth1()
+    .fitSize([width, height], data);
 
     // Draw the map
-    svg.append("g")
+      g
         .selectAll("path")
         .data(data.features)
-        .enter()
-        .append("path")
-          .attr("fill", "#b8b8b8")
-          .attr("d", d3.geoPath()
-              .projection(projection)
-          )
-        .style("stroke", "black")
-        .style("opacity", .3)
-
-    // Add circles:
-    svg
-      .selectAll("myCircles")
-      .data(markers)
-      .enter()
-      .append("circle")
-        .attr("class" , function(d){ return d.group })
-        .attr("cx", function(d){ return projection([d.long, d.lat])[0] })
-        .attr("cy", function(d){ return projection([d.long, d.lat])[1] })
-        .attr("r", function(d){ return size(d.size) })
-        .style("fill", function(d){ return color(d.group) })
-        .attr("stroke", function(d){ return color(d.group) })
-        .attr("stroke-width", 3)
-        .attr("fill-opacity", .4)
-
-
-    // This function is gonna change the opacity and size of selected and unselected circles
-    function update(){
-
-      // For each check box:
-      d3.selectAll(".checkbox").each(function(d){
-        cb = d3.select(this);
-        grp = cb.property("value")
-
-        // If the box is check, I show the group
-        if(cb.property("checked")){
-          svg.selectAll("."+grp).transition().duration(1000).style("opacity", 1).attr("r", function(d){ return size(d.size) })
-
-        // Otherwise I hide it
-        }else{
-          svg.selectAll("."+grp).transition().duration(1000).style("opacity", 0).attr("r", 0)
-        }
-      })
-    }
-
-    // When a button change, I run the update function
-    d3.selectAll(".checkbox").on("change",update);
-
-    // And I initialize it at the beginning
-    update()
+        .enter().append("path")
+            .attr("fill", "#808080")
+            .attr("d", d3.geoPath()
+                .projection(projection)
+            )
+            .style("stroke", "#fff") 
 })
+
+
+d3.select('#zoom-in').on('click', function() {
+  // Smooth zooming
+	zoom.scaleBy(svg.transition().duration(750), 1.3);
+});
+
+d3.select('#zoom-out').on('click', function() {
+  // Ordinal zooming
+  zoom.scaleBy(svg, 1 / 1.3);
+});
