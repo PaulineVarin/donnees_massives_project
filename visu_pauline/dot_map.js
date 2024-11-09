@@ -1,12 +1,13 @@
-//SVG
+//SVG definition
 var svg = d3.select("svg"),
-    width = window.innerWidth - 100,
-    height =  window.innerHeight - 50;
+    width = window.innerWidth -100 ,
+    height =  window.innerHeight  - 50;
 
 svg.attr('width', width).attr('height', height);
 var g = svg.append("g");
 
-//Zoom
+
+//Zoom definition
 function zoomed() {
   var transform = d3.event.transform; 
   g.style("stroke-width", 1.5 / transform.k + "px");
@@ -14,8 +15,19 @@ function zoomed() {
 }
 
 var zoom = d3.zoom()
-    .scaleExtent([1, 8])
+    .scaleExtent([1, 8]) // sclale min and max on the map
+    .translateExtent([[0, 0], [width, height]]) //limit the zoom at the map
     .on("zoom", zoomed);
+
+d3.select('#zoom-in').on('click', function() {
+  // Smooth zooming
+	zoom.scaleBy(svg.transition().duration(750), 1.3);
+});
+
+d3.select('#zoom-out').on('click', function() {
+  // Ordinal zooming
+  zoom.scaleBy(svg, 1 / 1.3);
+});
 
 svg.call(zoom);
 
@@ -38,14 +50,3 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
             )
             .style("stroke", "#fff") 
 })
-
-
-d3.select('#zoom-in').on('click', function() {
-  // Smooth zooming
-	zoom.scaleBy(svg.transition().duration(750), 1.3);
-});
-
-d3.select('#zoom-out').on('click', function() {
-  // Ordinal zooming
-  zoom.scaleBy(svg, 1 / 1.3);
-});
