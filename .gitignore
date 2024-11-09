@@ -161,3 +161,4 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 traitements_mongoDB/fichiers_json/UX_Projet.wasabi_clean.json
+traitements_mongoDB/fichiers_json/UX_Projet.wasabi_clean_map.json

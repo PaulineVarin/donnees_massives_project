@@ -1,0 +1,14 @@
+db.wasabi_clean.aggregate([
+    {
+        $group : {
+            _id : {
+                genreP : "$genrePrincipal",
+                paysCode : "$country"
+            }, 
+            nbAlbums : {$sum:1}
+        }
+    },
+    {
+        $out : "wasabi_clean_map"
+    }
+])
