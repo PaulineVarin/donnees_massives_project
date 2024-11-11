@@ -3,9 +3,10 @@ db.wasabi_clean.aggregate([
         $group : {
             _id : {
                 genreP : "$genrePrincipal",
-                paysCode : "$country"
+                pays : "$country_name"
             }, 
-            nbAlbums : {$sum:1}
+            nbAlbums : {$sum:1},
+            codePays : {$first : "$country"}
         }
     },
     {
