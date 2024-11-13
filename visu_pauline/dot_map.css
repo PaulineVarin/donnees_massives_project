@@ -1,0 +1,74 @@
+h1 {
+  text-align:center;
+}
+
+p {
+  font-size: large;
+}
+
+button {
+  margin-top: 30px;
+}
+select {
+  width: 100%;
+}
+
+#annee {
+  margin-top: 0;
+}
+
+#pagePauline {
+  display: flex;
+}
+
+
+#divGauche {
+  background-color: rgba(121, 110, 110, 0.5);
+  border-radius: 25px;
+  width:15%;
+  text-align:center;
+}
+
+#TitreLegende {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+#divLegende {
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#valAb {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+form {
+  margin-bottom: 10px;
+}
+
+#my_dataviz {
+  width:90%;
+}
+
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    cursor: pointer; /* Cursor on hover */
+}
+  
+.slider::-moz-range-thumb {
+  cursor: pointer; /* Cursor on hover */
+}
+

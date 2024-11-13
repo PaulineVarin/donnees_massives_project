@@ -1,15 +1,58 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="dot_map.css" />
+</head>
+
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 
-<button onClick="window.location.reload();">Reset Map</button>
 
-<!-- Create an element where the map will take place -->
- <div id="my_dataviz">
-   <svg></svg>
- </div>
+<div id="pagePauline">
+  <div id="divGauche">
+    <p id="TitreFiltres">Filtres</p>
+    <div class="slidecontainer">
+      <input type="range" min="1" max="100" class="slider" steps="1" id="myRange">
+      <p id="annee">Année: <span id="valueYear"></span></p>
+    </div>
+    
+    <div id="valAb">
+      <input type="checkbox" id="yearAll" name="yearAll" onclick="defineSclicer()"/>
+      <label for="scales">Voir les valeurs aberantes pour les années</label>
+    </div>
+
+    <form>
+      <p id="genre">Genre: <span id="valueGenre"></span></p>
+      <select id="genresAll" onchange="launchDropDownGenre()">
+      </select>
+    </form>
+    
+    <form>
+      <p id="pays">Pays: <span id="valuePays"></span></p>
+      <select id="countryAll" onchange="launchDropDownPays()">
+      </select>
+    </form>
+
+  
+    <button onClick="window.location.reload();">Reset Map</button>
+
+    <p id="TitreLegende">Légende</p>
+    <div id="divLegende">
+      <circle id="circle" style="fill: #69b3a2" stroke="black" cx=100 cy=100 r=40></circle>
+      <p>Nombre d'albums</p>
+    </div>
+    
+
+  </div>
+
+
+  <!-- Create an element where the map will take place -->
+  <div id="my_dataviz">
+    <h1 id="titre"></h1>
+    <svg></svg>
+  </div>
+</div>
 <script src="dot_map.js"></script>
