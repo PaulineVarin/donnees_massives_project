@@ -1,0 +1,59 @@
+db.wasabi.aggregate([
+    {
+       $group : {
+            _id : "$genreSecondaire",
+            value : { $sum: 1 },
+            genrePrincipal: { $first: "$genrePrincipal" }
+       }
+    },
+    {
+        $project : {
+            _id : 0,
+            value : 1,
+            genreSecondaire : "$_id",
+            genrePrincipal : 1
+        }
+    },
+    {
+         $group : {
+            _id : "$genrePrincipal",
+            children : {
+                $addToSet: {
+                        name : "$genreSecondaire",
+                        value : "$value"
+                    }
+            }
+        }
+    },
+    {
+        $project : {
+            _id : 0,
+            name : "$_id",
+            children : 1
+        }
+        
+    },
+    {
+        $project : {
+            name : "Genres",
+            children : { name: "$name", children: "$children"}
+        }
+    },
+    {
+        $group : {
+           _id : "$name",
+            children: {$addToSet:  { name: { $first: "$children.name" },children: {$first: "$children.children"}}}
+        }
+    },
+    {
+        $project : {
+            _id : 0,
+            name : "$_id",
+            children : 1
+        }
+    }
+    {
+        $out : "hierarchie_genre2"
+    }
+   
+])
