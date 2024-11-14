@@ -1,0 +1,10 @@
+db.bdBon.updateMany(
+  {
+    $or: [
+      { year: { $not: { $regex: "^[0-9]{4}$" } }},
+      { year: { $lt: "1950" } },
+      { year: { $gt: "2024" } }
+    ]
+  }, 
+{ $set: { year: "2025" } }
+)
