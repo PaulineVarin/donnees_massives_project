@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunburst Diagram</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="sunburst.css">
+</head>
+<body>
+   
+    
+    <div id="main-container">
+        <div id="controls">  
+            <div id="checkboxContainer">
+                <p>Genres principaux :</p>
+                <button id="deselectAll">Désélectionner tout</button>
+                <button id="selectAll">Sélectionner tout</button>
+            </div>
+        </div>
+        <div id="chart-container">
+            <h1>Hiérarchie des genres musicaux par nombre d'albums</h1> 
+            <div id="chart"></div>
+            <div id="tooltip" class="tooltip"></div>
+        </div>
+    </div>
+    <script src="sunburst.js"></script>
+    
+</body>
+</html>
