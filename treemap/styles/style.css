@@ -1,0 +1,260 @@
+/* General styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f7f6;
+    color: #333;
+    width: 100%;
+}
+
+#main-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    gap: 2em;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 1.3rem;
+    color: #0056b3;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+}
+
+/* Container for the filters */
+#filters {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+
+#filters label,
+.filter-container {
+    margin-bottom: 1em; /* Ajustez cette valeur pour réduire l’espace */
+}
+
+/* Retirez la marge inférieure du dernier élément pour un espacement cohérent */
+#filters label:last-child,
+.filter-container:last-child {
+    margin-bottom: 0;
+}
+
+/* Dropdown and input styles */
+select,
+input[type="range"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+select:focus,
+input[type="range"]:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.2);
+}
+
+/* Styling for the noUiSlider */
+#yearSlider {
+    width: 100%;  /* Make slider full width within filter section */
+    max-width: 800px;
+    margin: 1em 0 0.8em 0; /* Add more space above the slider */
+}
+
+/* Larger track and handles for noUiSlider */
+#yearSlider .noUi-target,
+#yearSlider .noUi-lower,
+#yearSlider .noUi-upper {
+    height: 16px; /* Increase track height */
+    background-color: #007BFF;
+    border-radius: 10px;
+}
+
+#yearSlider .noUi-handle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 3px solid #007BFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+#yearSlider .noUi-tooltip {
+    font-size: 1rem;
+    color: #333;
+    background-color: #e8e8e8;
+    padding: 6px 12px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Chart container */
+#chart {
+    width: 100%;
+    max-width: 850px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#chart-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Tooltip styling */
+.tooltip {
+    position: absolute;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    pointer-events: none;
+    white-space: nowrap;
+    text-align: left;
+}
+
+/* Style pour les filtres avec cases à cocher */
+.filter-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.filter-header {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-header:after {
+    content: "▼";
+    font-size: 0.8em;
+    color: #999;
+}
+
+.checkbox-list {
+    display: none;
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.checkbox-list label {
+    display: block;
+    padding: 5px;
+}
+
+.checkbox-list input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* Styles pour afficher/masquer les listes de cases à cocher */
+.filter-container.active .checkbox-list {
+    display: block;
+}
+
+.toggle-select {
+    background: none;
+    border: none;
+    color: #007BFF;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+}
+
+.toggle-select:hover {
+    text-decoration: underline;
+}
+
+#controls-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+#backButton {
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-self: flex-start;
+}
+
+#backButton:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+#backButton:active {
+    background-color: #004494;
+    transform: translateY(1px);
+}
+
+#backButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #filters {
+        width: 100%;
+    }
+
+    #chart-container {
+        width: 100%;
+    }
+}

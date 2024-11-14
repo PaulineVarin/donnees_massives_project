@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse des genres, pays et artistes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<h1>Analyse des genres, pays et artistes par nombre de chansons et d'albums</h1>
+
+<div id="main-container">
+    <div id="filters">
+        <label>Année de sélection :
+            <div id="yearSlider"></div>
+            <span id="selectedYear">1950</span>
+        </label>
+
+        <div class="filter-container" id="countryFilter">
+            <div class="filter-header">
+                <span>Pays</span>
+                <button class="toggle-select" data-target="countryCheckboxes">Tout sélectionner</button>
+            </div>
+            <div class="checkbox-list" id="countryCheckboxes"></div>
+        </div>
+
+        <div class="filter-container" id="genreFilter">
+            <div class="filter-header">
+                <span>Genre</span>
+                <button class="toggle-select" data-target="genreCheckboxes">Tout sélectionner</button>
+            </div>
+            <div class="checkbox-list" id="genreCheckboxes"></div>
+        </div>
+    </div>
+
+    <div id="chart-container">
+        <div id="chart">
+            <div id="controls-container">
+                <button id="backButton">Retour</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.js"></script>
+<script type="module" src="scripts/filters.js"></script>
+<script type="module" src="scripts/tree_map.js"></script>
+
+</body>
+</html>

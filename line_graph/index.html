@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Albums by Year</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+
+<h1>Nombre d'albums par an</h1>
+<div id="filters">
+    <label>Pays:
+        <select id="countryFilter">
+            <option value="Tous les pays">Tous les pays</option>
+        </select>
+    </label>
+    <label>Genre:
+        <select id="genreFilter">
+            <option value="Tous les genres">Tous les genres</option>
+        </select>
+    </label>
+    <label>Plage d'années:
+        <div id="yearRangeSlider"></div>
+        <span id="yearRangeLabel"></span>
+    </label>
+    <button id="resetButton">Reset</button>
+</div>
+
+<div id="chart">
+</div>
+
+<script src="scripts/line_chart.js" type="module"></script>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+/* General styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f7f6;
+    color: #333;
+    width: 100%;
+}
+
+h1 {
+    font-size: 1.3rem;
+    color: #0056b3;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+}
+
+/* Container for the filters */
+#filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    margin-bottom: 20px;
+    width: 100%; /* Make filters full width */
+    max-width: 1200px; /* Increase max width for large screens */
+}
+
+#filters label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #444;
+    flex: 1; /* Make each label expand equally */
+    min-width: 200px; /* Set minimum width for smaller screens */
+}
+
+/* Dropdown and input styles */
+select,
+input[type="range"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+select:focus,
+input[type="range"]:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.2);
+}
+
+/* Styling for the noUiSlider */
+#yearRangeSlider {
+    width: 100%;  /* Make slider full width within filter section */
+    max-width: 800px;
+    margin: 1em 0 0.8em 0; /* Add more space above the slider */
+}
+
+/* Larger track and handles for noUiSlider */
+#yearRangeSlider .noUi-target,
+#yearRangeSlider .noUi-lower,
+#yearRangeSlider .noUi-upper {
+    height: 16px; /* Increase track height */
+    background-color: #007BFF;
+    border-radius: 10px;
+}
+
+#yearRangeSlider .noUi-handle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 3px solid #007BFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+#yearRangeSlider .noUi-tooltip {
+    font-size: 1rem;
+    color: #333;
+    background-color: #e8e8e8;
+    padding: 6px 12px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Chart container */
+#chart {
+    width: 100%;
+    max-width: 850px; /* Increase max width for the chart */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tooltip styling */
+.tooltip {
+    position: absolute;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    pointer-events: none;
+    white-space: nowrap;
+    text-align: left;
+}
+
+/* Style for the reset button */
+#resetButton {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px; /* Add some space above the button */
+    align-self: flex-start; /* Align button to the left */
+}
+
+#resetButton:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+#resetButton:active {
+    background-color: #004494; /* Even darker on click */
+    transform: translateY(1px); /* Slight push-down effect on click */
+}
+
+#resetButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4); /* Light blue focus ring */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    #filters {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #chart {
+        width: 100%;
+    }
+}
